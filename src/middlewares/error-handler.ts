@@ -24,6 +24,7 @@ export const errorHandler = (
   res: Response,
   next: NextFunction
 ) => {
+  console.log(err);
   let errorObject: ErrorObject = {};
 
   if (err instanceof CustomError && isCustomError(err)) {

@@ -45,7 +45,7 @@ app.use(methodChecker); // Checks if the incoming request method is supported
 app.use(express.urlencoded({ extended: true })); // Parse urlencoded data in request body
 app.use(express.json({})); // Parse json data in request body
 
-app.use("/api/v1/", appRouter);
+app.use("/kannie/api/v1/", appRouter);
 app.get(/^\/(api\/v1)?(\/)?$/, (req: Request, res: any) => {
   return res.send({
     success: true,

@@ -18,6 +18,5 @@
         }
     ],
     "installCommand": "yarn install",
-    "buildCommand": "yarn build",
-    "startCommand": "yarn start"
+    "buildCommand": "yarn build"
 }

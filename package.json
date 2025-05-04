@@ -7,6 +7,7 @@
     "start:dev": "set NODE_ENV=development && nodemon src/main.ts",
     "start:staging": "set NODE_ENV=staging && node ./dist/src/main.js",
     "start:prod": "set NODE_ENV=production && node ./dist/src/main.js",
+    "start": "set NODE_ENV=production && node ./dist/src/main.js",
     "build": "rm -rf ./dist && tsc --build tsconfig.build.json"
   },
   "keywords": [],

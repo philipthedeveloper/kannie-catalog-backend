@@ -5,21 +5,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.config = void 0;
 const dotenv_1 = __importDefault(require("dotenv"));
-const path_1 = __importDefault(require("path"));
 const logging_1 = require("@/logging");
 const ms_1 = __importDefault(require("ms"));
-// Get current node environment
-const env = process.env.NODE_ENV || "development";
-// Configure env
-const envFileName = `.env`;
-const envPath = path_1.default.resolve(process.cwd(), envFileName).trim();
 // Try loading the environment variables and check if there's an error
-const result = dotenv_1.default.config({ path: envPath });
+const result = dotenv_1.default.config();
 if (result.error) {
     logging_1.logger.error("Error loading .env file:", result.error);
 }
 else {
-    logging_1.logger.debug("Successfully loaded .env file:", envPath);
+    logging_1.logger.debug("Successfully loaded .env file:");
 }
 exports.config = {
     port: Number.parseInt(process.env.PORT) || 3000,
@@ -54,3 +48,4 @@ exports.config = {
     },
     isProduction: process.env.ENVIRONMENT === "production",
 };
+console.log(exports.config);

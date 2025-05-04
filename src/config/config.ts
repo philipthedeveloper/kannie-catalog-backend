@@ -3,21 +3,13 @@ import path from "path";
 import { logger } from "@/logging";
 import ms, { StringValue } from "ms";
 
-// Get current node environment
-const env = process.env.NODE_ENV || "development";
-
-// Configure env
-const envFileName = `.env`;
-
-const envPath = path.resolve(process.cwd(), envFileName).trim();
-
 // Try loading the environment variables and check if there's an error
-const result = dotenv.config({ path: envPath });
+const result = dotenv.config();
 
 if (result.error) {
   logger.error("Error loading .env file:", result.error);
 } else {
-  logger.debug("Successfully loaded .env file:", envPath);
+  logger.debug("Successfully loaded .env file:");
 }
 
 export const config = {
@@ -55,3 +47,5 @@ export const config = {
   },
   isProduction: process.env.ENVIRONMENT === "production",
 };
+
+console.log(config);

@@ -1,6 +1,5 @@
 import { createLogger, format, transports } from "winston";
 import chalk from "chalk";
-import path from "path";
 
 export enum LoggerLevels {
   ERROR = "error",
@@ -26,43 +25,12 @@ const colorize = format.printf(({ level, message, timestamp }) => {
   return `${timestamp} ${chalk[color](level)}: ${chalk[color](message)}`;
 });
 
-const plainTextFormat = format.printf(({ level, message, timestamp }) => {
-  return `${timestamp} ${level}: ${message}`;
-});
-
-const env = (process.env.NODE_ENV || "development").trim();
-const logFileName = `${env}.combined.log`;
-const errorLogFileName = `${env}.error.log`;
-
 export const logger = createLogger({
   level: "debug",
   format: format.combine(format.timestamp(), format.simple()),
   transports: [
     new transports.Console({
       format: format.combine(format.timestamp(), colorize),
-    }),
-    new transports.File({
-      filename: path.resolve(
-        process.cwd(),
-        env === "development" ? "src" : "dist/src",
-        "logging",
-        "logs",
-        "errors",
-        errorLogFileName
-      ),
-      level: "error",
-      format: format.combine(format.timestamp(), plainTextFormat),
-    }),
-    new transports.File({
-      filename: path.resolve(
-        process.cwd(),
-        env === "development" ? "src" : "dist/src",
-        "logging",
-        "logs",
-        "global",
-        logFileName
-      ),
-      format: format.combine(format.timestamp(), plainTextFormat),
     }),
   ],
 });

@@ -6,8 +6,7 @@
             "use": "@vercel/node",
             "config": {
                 "includeFiles": [
-                    "dist/**",
-                    "node_modules"
+                    "dist/**"
                 ]
             }
         }
@@ -17,5 +16,6 @@
             "src": "/(.*)",
             "dest": "dist/src/main.js"
         }
-    ]
+    ],
+    "installCommand": "yarn install"
 }

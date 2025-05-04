@@ -1,0 +1,18 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.authRouter = void 0;
+const helpers_1 = require("@/helpers");
+const middlewares_1 = require("@/middlewares");
+const decorators_1 = require("@/decorators");
+const controllers_1 = require("@/controllers");
+const enums_1 = require("@/enums");
+exports.authRouter = (0, helpers_1.createRouter)();
+const authController = controllers_1.AuthController.getInstance();
+exports.authRouter.post("/admin/login", (0, middlewares_1.validateDTO)(decorators_1.LoginDto), authController.adminLogin);
+exports.authRouter.get("/session", middlewares_1.validateToken, authController.session);
+exports.authRouter.patch("/change-password", middlewares_1.validateToken, (0, middlewares_1.validateDTO)(decorators_1.ChangePasswordDto), authController.changePassword);
+exports.authRouter.get("/admin/seed", authController.seedAdmin);
+exports.authRouter.post("/logout", middlewares_1.validateToken, authController.logout);
+exports.authRouter.route("/profile").get(middlewares_1.validateToken, authController.getProfile);
+exports.authRouter.get("/admin/get-admins", middlewares_1.validateToken, (0, middlewares_1.permissionRequirement)([enums_1.UserTypes.ADMIN]), authController.getAdmins);
+exports.authRouter.post("/admin/create-admin", middlewares_1.validateToken, (0, middlewares_1.permissionRequirement)([enums_1.UserTypes.ADMIN]), (0, middlewares_1.validateDTO)(decorators_1.CreateAuthDto), authController.createAdmin);

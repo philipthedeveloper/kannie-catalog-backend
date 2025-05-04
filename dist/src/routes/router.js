@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.appRouter = void 0;
+const helpers_1 = require("@/helpers");
+const auth_routes_1 = require("./auth.routes");
+const analytics_routes_1 = require("./analytics.routes");
+const content_routes_1 = require("./content.routes");
+exports.appRouter = (0, helpers_1.createRouter)();
+exports.appRouter.use("/auth", auth_routes_1.authRouter);
+exports.appRouter.use("/analytics", analytics_routes_1.analyticsRouter);
+exports.appRouter.use("/content", content_routes_1.contentRouter);
